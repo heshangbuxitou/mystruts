@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="xxxx" extends="struts-default">
+    	<action name="regist" class="com.system.action.UserAction" method="regist">
+    		<result name="success">/index.jsp</result>
+    		<result name="error">/regist.jsp</result>
+    	</action>
+    	<action name="login" class="com.system.action.UserAction" method="login">
+    		<result name="success" type="redirect">/index.jsp</result>
+    		<result name="error">/login.jsp</result>
+    	</action>
+    	<action name="watchtask" class="com.system.action.UserAction" method="watchtask">
+    		<result name="success">/list.jsp</result>
+    		<result name="error">/index.jsp</result>
+    	</action>
+    	<action name="logout" class="com.system.action.UserAction" method="logout">
+    		<result name="success">/index.jsp</result>
+    	</action>
+    	<action name="watchuser" class="com.system.action.UserAction" method="watchuser">
+    		<result name="success">/userlist.jsp</result>
+    		<result name="error">/index.jsp</result>
+    	</action>
+    	<action name="addtask" class="com.system.action.TaskinfoAction" method="addtask">
+    		<result name="success" type="redirectAction">
+    			<param name="actionName">watchtask</param>
+    			<param name="id">${#parameters.id}</param>
+    		</result>
+    		<result name="error">/addtask.jsp?id=${#parameters.id}</result>
+    	</action>
+    	<action name="findtask" class="com.system.action.TaskinfoAction" method="findtask">
+			<result name="success">/modifytask.jsp</result>
+    	</action>
+    	<action name="modifytask" class="com.system.action.TaskinfoAction" method="modifytask">
+			<result name="success" type="redirectAction">
+    			<param name="actionName">watchtask</param>
+    			<param name="id">${#session.user.userid}</param>
+    		</result>
+    	</action>
+    	<action name="deletetask" class="com.system.action.TaskinfoAction" method="deletetask">
+			<result name="success" type="redirectAction">
+    			<param name="actionName">watchtask</param>
+    			<param name="id">${#session.user.userid}</param>
+    		</result>
+    	</action>
+    </package> 
+</struts>

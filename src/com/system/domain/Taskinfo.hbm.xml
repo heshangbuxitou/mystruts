@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.system.domain" auto-import="true">
+	<class name="Taskinfo" table="taskinfo">	
+		<!-- 主键 ，映射-->
+		<id name="taskid" column="taskid">
+			<!-- 
+				主键的生成策略
+					identity  自增长(mysql,db2)
+					sequence  自增长(序列)， oracle中自增长是以序列方法实现
+					native  自增长【会根据底层数据库自增长的方式选择identity或sequence】
+							如果是mysql数据库, 采用的自增长方式是identity
+							如果是oracle数据库， 使用sequence序列的方式实现自增长
+					
+					increment  自增长(会有并发访问的问题，一般在服务器集群环境使用会存在问题。)
+					
+					assigned  指定主键生成策略为手动指定主键的值
+					uuid      指定uuid随机生成的唯一的值
+					foreign   (外键的方式， one-to-one讲)
+			 -->
+			<generator class="native"/>
+		</id>
+		
+		<!-- 
+			普通字段映射
+			property
+				name  指定对象的属性名称
+				column 指定对象属性对应的表的字段名称，如果不写默认与对象属性一致。
+				length 指定字符的长度, 默认为255
+				type   指定映射表的字段的类型，如果不指定会匹配属性的类型
+					java类型：     必须写全名
+					hibernate类型：  直接写类型，都是小写
+		-->
+		<property name="userid" column="userid"></property>
+		<property name="endtime" column="endtime" type="java.util.Date"></property>
+		<property name="title"  type="java.lang.String"></property>
+		<property name="content"  type="java.lang.String"></property>
+		<property name="status"  type="java.lang.String"></property>
+		<property name="realtime"  type="java.util.Date"></property>
+		<property name="result"  type="java.lang.String"></property>
+		<!-- 如果列名称为数据库关键字，需要用反引号或改列名。 -->		
+	</class>
+
+</hibernate-mapping>
